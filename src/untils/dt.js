@@ -1,13 +1,13 @@
 /**
- * @description 时间相关的工具函数
+ * @description datetime
  * @author jinyuwanguwang、
  */
 
 const { format } = require('date-fns')
 
 /**
-  * 格式化时间，如 09.05 23:02
-  * @param {string} str 时间字符串
+
+  * @param {string} str dtstr
   */
 function timeFormat(str) {
     return format(new Date(str), 'MM.dd HH:mm')

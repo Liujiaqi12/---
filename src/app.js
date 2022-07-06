@@ -5,19 +5,19 @@ const json = require('koa-json')
 const onerror = require('koa-onerror')
 const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
-// 引入session redis
+// session redis
 const session = require('koa-generic-session')
 const redisStore = require('koa-redis')
-// 引入配置
+
 const { REDIS_CONF } = require('./config/db')
-// 引入环境
+
 const { isProd } = require('./untils/env')
-// 引入密钥
+
 const { SESSION_SECRECT_KEY } = require('./config/secrectkeys')
-// 标准引入路径
+
 const path = require('path')
 
-// 路由
+
 const atApiRouter = require('./routes/api/blog-at')
 const squareApiRouter = require('./routes/api/blog-square')
 const profileApiRouter = require('./routes/api/blog-profile')
@@ -28,12 +28,11 @@ const userViewRouter = require('./routes/view/user')
 const userApiRouter = require('./routes/api/user')
 const errorViewRouter = require('./routes/view/error')
 
-// error handler
 let onerrorConf = {}
 if (isProd) {
-    // 生产环境就跳到错误页，如果是开发环境将错误暴露出来方便改bug
+    
     onerrorConf = {
-        redirect: '/error'  // 遇到错误时就跳转到错误页（重定向）
+        redirect: '/error'  
     }
 }
 onerror(app, onerrorConf)
@@ -51,29 +50,23 @@ app.use(views(__dirname + '/views', {
     extension: 'ejs'
 }))
 
-// session配置
-app.keys = [SESSION_SECRECT_KEY] // 密钥
-// session如果不用的时候不会往redis里面塞数据和设置cookie
+// session
+app.keys = [SESSION_SECRECT_KEY] 
+
 app.use(session({
-    key: 'weibo.sid',   // cookie name 默认是 'koa.sid'
-    prefix: 'weibo:sess:', // redis key的前缀 默认是 'koa:sess:'
+    key: 'weibo.sid',  
+    prefix: 'weibo:sess:', 
     cookie: {
         path: '/',
-        httpOnly: true,     // 只能server端改cookie
-        maxAge: 24 * 60 * 60 * 1000,   // ms
+        httpOnly: true,     
+        maxAge: 24 * 60 * 60 * 1000,  
     },
     store: redisStore({
         all: `${REDIS_CONF.host}:${REDIS_CONF.port}`
     })
 }))
 
-// logger
-// app.use(async (ctx, next) => {
-//   const start = new Date()
-//   await next()
-//   const ms = new Date() - start
-//   console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
-// })
+
 
 // routes
 app.use(atApiRouter.routes(), atApiRouter.allowedMethods())

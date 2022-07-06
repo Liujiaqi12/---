@@ -1,16 +1,16 @@
 /**
- * @description user数据格式校验
+ * @description userdatebase format check
  * @author jinyuwanguwang、
  */
 
 const validate = require('./_validator')
-// 用户校验规则
+// user datebase check
 const SCHEMA = {
     type: 'object',
     properties: {
         userName: {
             type: 'string',
-            pattern: '^[a-zA-Z][a-zA-Z0-9_]+$', // 字母开头，字母数字下划线
+            pattern: '^[a-zA-Z][a-zA-Z0-9_]+$', 
             maxLength: 255,
             minLength: 2
         },
@@ -46,8 +46,8 @@ const SCHEMA = {
 }
 
 /**
- * 校验用户输入数据格式
- * @param {Object} data 用户数据 
+ * check userinput dataformat
+ * @param {Object} data userdata
  */
 function userValidate(data = {}) {
     return validate(SCHEMA, data)

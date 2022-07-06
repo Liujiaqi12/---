@@ -1,5 +1,5 @@
 /**
- * @description 微博数据相关工具
+ * @description blogdatabase
  * @author jinyuwanguwang、
  */
 
@@ -7,15 +7,15 @@ const fs = require('fs')
 const path = require('path')
 const ejs = require('ejs')
 
-// 获取blog—list.ejs 的文件内容
+// read blog—list.ejs 
 const BLOG_LIST_TPL = fs.readFileSync(
     path.join(__dirname, '..', 'views', 'widgets', 'blog-list.ejs')
 ).toString()
 
 /**
- * 更具blogList渲染出字符串
- * @param {Array} blogList 微博列表
- * @param {Boolean} canReply 是否可以回复
+ 
+ * @param {Array} blogList bloglist
+ * @param {Boolean} canReply reply 
  * @returns 
  */
 function getBlogListString(blogList = [], canReply = false) {

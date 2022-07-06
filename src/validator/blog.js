@@ -1,10 +1,10 @@
 /**
- * @description user数据格式校验
+ * @description user datebase check
  * @author jinyuwanguwang、
  */
 
 const validate = require('./_validator')
-// 用户校验规则
+// user datebase check
 const SCHEMA = {
     type: 'object',
     properties: {
@@ -19,8 +19,8 @@ const SCHEMA = {
 }
  
 /**
-  * 校验微博输入数据格式
-  * @param {Object} data 微博数据 
+  * check input datebase 
+  * @param {Object} data blog datebase
   */
 function blogValidate(data = {}) {
     return validate(SCHEMA, data)

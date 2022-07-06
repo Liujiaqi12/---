@@ -1,17 +1,17 @@
 /**
- * @description json schema 校验
+ * @description json schema 
  * @author jinyuwanguwang、
  */
 
 const Ajv = require('ajv')
 const ajv = new Ajv({
-    // allErrors: true     // 输出所有错误（所有错误找全后返回）---比较慢
+    // allErrors: true     
 })
 
 /**
  * 
- * @param {Object} schema json schema规则
- * @param {Object} data 待校验的数据
+ * @param {Object} schema json schema
+ * @param {Object} data 
  */
 function validate(schema, data = {}) {
     const valid = ajv.validate(schema, data)

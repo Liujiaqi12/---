@@ -1,16 +1,10 @@
-/**
- * @description 用户关系
- * @author jinyuwanguwang、
- */
+
 
 const { User, UserRelation } = require('../db/model/index')
 const { formatUser } = require('./_format')
 const Sequelize = require('sequelize')
 
-/**
- * 获取关注该用户的用户列表
- * @param {string} followerId 
- */
+
 async function getUserByFollower (followerId) {
     const result = await User.findAndCountAll({
         attributes: ['id', 'nikeName', 'userName', 'picture'],
@@ -29,10 +23,8 @@ async function getUserByFollower (followerId) {
             }
         ]
     })
-    // result.count 是查询总数
-    // result.rows 是查询结果、数组
     
-    // 格式化
+   
     let userList = result.rows.map(row => row.dataValues)
     userList = formatUser(userList)
 
@@ -43,7 +35,7 @@ async function getUserByFollower (followerId) {
 }
 
 /**
- * 获取关注人列表
+
  * @param {*} userId 
  */
 async function getFollowersByUser (userId) {
@@ -65,7 +57,7 @@ async function getFollowersByUser (userId) {
         }
     })
 
-    // 格式化
+   
     let userList = result.rows.map(row => row.dataValues)
     userList = userList.map(item => {
         let user = item.user.dataValues
@@ -74,15 +66,15 @@ async function getFollowersByUser (userId) {
     })
 
     return {
-        count: result.count, // 查询出来的总数
+        count: result.count, 
         userList
     }
 }
 
 /**
- * 关注数据层
- * @param {*} userId 用户id
- * @param {*} followerId 被关注用户id
+
+ * @param {*} userId
+ * @param {*} followerId 
  */
 async function addFollower (userId, followerId) {
     const result = await UserRelation.create({

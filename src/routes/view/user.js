@@ -1,18 +1,12 @@
-/**
- * @description 用户路由
- * @author jinyuwanguwang、
- */
+
 
 const router = require('koa-router')()
 const { loginRedirect } = require('../../middlewares/loginChecks')
 
-/**
- * 获取登录信息
- * @param {Object} ctx ctx 
- */
+
 function getLoginInfo(ctx) {
     let data = {
-        isLogin: false  // 默认未登录
+        isLogin: false  
     }
     const userInfo = ctx.session.userInfo
     if (userInfo) {
